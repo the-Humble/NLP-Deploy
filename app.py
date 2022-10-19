@@ -1,24 +1,32 @@
+#Import main library
+from logging import exception
 #from pyexpat import model
-from pandas import read_csv, concat
-from pickle import load, dump
+import pandas as pd
+import numpy as np
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.svm import SVC
+from sklearn.metrics import f1_score, classification_report, confusion_matrix, recall_score
+from sklearn.model_selection import GridSearchCV
 
 #Import Flask modules
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
+
+#Import pickle to save our regression model
+import pickle 
 
 import os
+from os.path import join, dirname, realpath
 
 #Initialize Flask and set the template folder to "template"
 app = Flask(__name__, template_folder = 'template')
 UPLOAD_FOLDER = 'static/files'
 app.config['UPLOAD_FOLDER'] =  UPLOAD_FOLDER
 #Open our model 
-model = load(open('model.pkl','rb'))
-tfidfv = load(open('wordvector.mkl','rb'))
-
+model = pickle.load(open('model.pkl','rb'))
+tfidfv = pickle.load(open('wordvector.mkl','rb'))
+#create our "home" route using the "index.html" page
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -63,7 +71,7 @@ def feed():
             #print("UploadedFile:", uploaded_file.filename)
             #redirect(url_for('index'))
             #print("About to read")
-            dfreview = read_csv(file_path)
+            dfreview = pd.read_csv(file_path)
             #print("File Read")
             #data_top = dfreview.head() 
             # display 
@@ -96,7 +104,7 @@ def feed():
             dfpositivos = dfreview[dfreview[sentiment]==sentpos][:9000]
             dfnegativos = dfreview[dfreview[sentiment]==sentneg][:1000]
             print("Los negas: ",dfnegativos)
-            dfreviewdes = concat([dfpositivos,dfnegativos])
+            dfreviewdes = pd.concat([dfpositivos,dfnegativos])
 
             #Se hace un undersampling para balancear el dataset partido
             rus = RandomUnderSampler()
@@ -133,8 +141,8 @@ def feed():
             svc.fit(trainXVector,trainY)
 
             #save model
-            dump(svc, open('model.pkl', 'wb'))
-            dump(tfidf, open('wordvector.mkl','wb'))
+            pickle.dump(svc, open('model.pkl', 'wb'))
+            pickle.dump(tfidf, open('wordvector.mkl','wb'))
             global model
             global tfidfv
             model = svc
