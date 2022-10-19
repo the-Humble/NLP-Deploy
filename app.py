@@ -7,7 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import SVC
 
 #Import Flask modules
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template
 
 import os
 
