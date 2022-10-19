@@ -1,0 +1,64 @@
+<!---Initialize Home Page--->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <!---Initialize structure of Title and house picture--->
+        <div class = "container">
+            <div class="center-block text-center pt-3">
+                <h1>Sentimental reviewer</h1>
+            </div>
+        </div>
+        <!---Links/buttons to other websites--->
+        <div id = "menu-outer">
+            <div class = "table">
+                <ul id = "horizontal-list">
+                    <li><a href = "https://flask.palletsprojects.com/en/2.0.x/" target="_blank" class = "link"><span class = "titleLink">Python Flask</span></a></li>
+                    <li><a href = "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html" target="_blank" class = "link"><span class = "titleLink">Scikit-Learn</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <!---Containerize main page for styling--->
+        <div class = "page">
+            <!---Containerize paragraph and form for styling--->
+            <div class = "container">
+                <div class = "intro">
+                    <b>
+                        <p class = "Note"><b>Note: Feed files with a "Review" and a "Sentiment" Column.</b></p>
+                    </b>
+                </div>
+                <br>
+                <h2>Feed the model</h2>
+                <!---Initialize form structure and inputs, set method to "POST"--->
+                <form action = "{{url_for('feed')}}" method = "post" class = "info" enctype="multipart/form-data">
+                    <input type="file" id="myFile" name="filename"><span style="color:red"> * </span>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn" >Feed</button>
+                </form>
+                <br>
+                
+                <h2>Predict a review</h2>
+                <!---Initialize form structure and inputs, set method to "POST"--->
+                <form action = "{{url_for('predict')}}" method = "post" class = "info" >
+                    <input type="text" id="name" name="Average Income of Area" placeholder="Input to Review" required="required"/><span style="color:red"> * </span>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn">Predict</button>
+                </form>
+                <br> 
+                <!---Set placeholder for prediction output--->
+                <div class ="pred">
+                    <p class = "result"><b>{{ feed_result }}</b></p>
+                    <p class = "result"><b>{{ prediction_text }}</b></p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>
