@@ -9,56 +9,61 @@
     <body>
         <div class="container-fluid">
             <!---Initialize structure of Title and house picture--->
-        <div class = "container">
-            <div class="center-block text-center pt-3">
-                <h1>Sentimental reviewer</h1>
-            </div>
-        </div>
-        <!---Links/buttons to other websites--->
-        <div id = "menu-outer">
-            <div class = "table">
-                <ul id = "horizontal-list">
-                    <li><a href = "https://flask.palletsprojects.com/en/2.0.x/" target="_blank" class = "link"><span class = "titleLink">Python Flask</span></a></li>
-                    <li><a href = "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html" target="_blank" class = "link"><span class = "titleLink">Scikit-Learn</span></a></li>
-                </ul>
-            </div>
-        </div>
-        <!---Containerize main page for styling--->
-        <div class = "page">
-            <!---Containerize paragraph and form for styling--->
             <div class = "container">
-                <div class = "intro">
-                    <b>
-                        <p class = "Note"><b>Note: Feed files with a "Review" and a "Sentiment" Column.</b></p>
-                    </b>
-                </div>
-                <br>
-                <h2>Feed the model</h2>
-                <!---Initialize form structure and inputs, set method to "POST"--->
-                <form action = "{{url_for('feed')}}" method = "post" class = "info" enctype="multipart/form-data">
-                    <input type="file" id="myFile" name="filename"><span style="color:red"> * </span>
-                    <br>
-                    <br>
-                    <button type="submit" class="btn" >Feed</button>
-                </form>
-                <br>
-                
-                <h2>Predict a review</h2>
-                <!---Initialize form structure and inputs, set method to "POST"--->
-                <form action = "{{url_for('predict')}}" method = "post" class = "info" >
-                    <input type="text" id="name" name="Average Income of Area" placeholder="Input to Review" required="required"/><span style="color:red"> * </span>
-                    <br>
-                    <br>
-                    <button type="submit" class="btn">Predict</button>
-                </form>
-                <br> 
-                <!---Set placeholder for prediction output--->
-                <div class ="pred">
-                    <p class = "result"><b>{{ feed_result }}</b></p>
-                    <p class = "result"><b>{{ prediction_text }}</b></p>
+                <div class="center-block text-center pt-3">
+                    <h1>Sentimental reviewer</h1>
                 </div>
             </div>
-        </div>
+            <!---Containerize main page for styling--->
+            <div class = "page">
+                <!---Containerize paragraph and form for styling--->
+                <div class = "container text-center">
+                    <div class = "intro">
+                        <b>
+                            <p class = "Note pb-4"><b>Note: Feed files with a "Review" and a "Sentiment" Column.</b></p>
+                        </b>
+                    </div>
+                    <div class="col-sm pb-5">
+                        <div class="row pb-5">
+                            <h2>Feed the model</h2>
+                            <!---Initialize form structure and inputs, set method to "POST"--->
+                            <form action = "{{url_for('feed')}}" method = "post" class = "info" enctype="multipart/form-data">
+                                <input type="file" id="myFile" name="filename"><span style="color:red"> * </span>
+                                <br>
+                                <br>
+                                <button type="submit" class="btn btn-secondary" >Feed New Model</button>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <h2>Predict a result</h2>
+                            <!---Initialize form structure and inputs, set method to "POST"--->
+                            <form action = "{{url_for('predict')}}" method = "post" class = "info" >
+                                <input type="text" id="name" name="Average Income of Area" placeholder="Input to Review" required="required"/><span style="color:red"> * </span>
+                                <br>
+                                <br>
+                                <button type="submit" class="btn btn-primary">Predict</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!---Set placeholder for prediction output--->
+                    <div class ="pred">
+                        <h3>RESULTS</h3>
+                        <p class = "result"><b>{{ feed_result }}</b></p>
+                        <p class = "result"><b>{{ prediction_text }}</b></p>
+                    </div>
+                </div>
+                <!---Links/buttons to other websites--->
+                <div id = "menu-outer">
+                    <h5>Made using:</h5>
+                    <div class = "table">
+                        <ul id = "horizontal-list">
+                            <li><a href = "https://flask.palletsprojects.com/en/2.0.x/" target="_blank" class = "link"><span class = "titleLink">Python Flask</span></a></li>
+                            <li><a href = "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html" target="_blank" class = "link"><span class = "titleLink">Scikit-Learn</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
