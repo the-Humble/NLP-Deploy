@@ -32,7 +32,7 @@ tfidfv = pickle.load(open('wordvector.mkl', 'rb'))
 
 @app.route('/')
 def home():
-    return render_template('index2.html')
+    return render_template('index.html')
 
 #Set a post method to yield predictions on page
 
@@ -58,7 +58,7 @@ def predict():
         return render_template('index.html', prediction_text = "Predicted Price is negative, values entered not reasonable")
     elif output >= 0:
         """
-    return render_template('index2.html', prediction_text='The review is: ${}'.format(prediction))
+    return render_template('index.html', prediction_text='The review is: ${}'.format(prediction))
 
 #Set the model
 
@@ -168,12 +168,12 @@ def feed():
             model = svc
             tfidfv = tfidf
 
-            return render_template('index2.html', feed_result='The model was feed with: {} with score of {}%'.format(uploaded_file.filename, round(model.score(testXVector, testY)*100, 2)))
+            return render_template('index.html', feed_result='The model was feed with: {} with score of {}%'.format(uploaded_file.filename, round(model.score(testXVector, testY)*100, 2)))
         except Exception:
             print(Exception)
-            return render_template('index2.html', feed_result='No valid file provided')
+            return render_template('index.html', feed_result='No valid file provided')
     else:
-        return render_template('index2.html', feed_result='No valid file provided')
+        return render_template('index.html', feed_result='No valid file provided')
 
 
 #Run app
