@@ -30,6 +30,11 @@
                             <form action = "{{url_for('feed')}}" method = "post" class = "info" enctype="multipart/form-data">
                                 <input type="file" id="myFile" name="filename"><span style="color:red"> * </span>
                                 <br>
+                                <select id="swselector" name="swselector">
+                                    <option value="no">Don't consider stopwords</option>
+                                    <option value="english">Consider English stopwords</option>
+                                    <option value="spanish">Consider Spanish stopwords</option>
+                                </select>
                                 <br>
                                 <button type="submit" class="btn btn-secondary" >Feed New Model</button>
                             </form>
