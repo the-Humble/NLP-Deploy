@@ -9,7 +9,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.svm import SVC
 from sklearn.metrics import f1_score, classification_report, confusion_matrix, recall_score
 from sklearn.model_selection import GridSearchCV
-from nltk.corpus import stopwords
+#from nltk.corpus import stopwords
 
 #Import Flask modules
 from flask import Flask, request, render_template, redirect, url_for
@@ -66,7 +66,7 @@ def predict():
 @app.route('/csv', methods=['POST'])
 def feed():
     print(request.files)
-    stopword_es = stopwords.words('spanish')
+    #stopword_es = stopwords.words('spanish')
     #print(stopword_es)
     uploaded_file = request.files['filename']
     stopw = request.form.get('swselector')
