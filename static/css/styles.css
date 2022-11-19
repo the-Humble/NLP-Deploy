@@ -1,0 +1,16 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container  * {
+    margin: .5rem;
+}
+
+.pred {
+    outline: 2px solid black;
+    min-height: 50px;
+
+}

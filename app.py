@@ -58,7 +58,7 @@ def predict():
         return render_template('index.html', prediction_text = "Predicted Price is negative, values entered not reasonable")
     elif output >= 0:
         """
-    return render_template('index.html', prediction_text='The review is: ${}'.format(prediction))
+    return render_template('index.html', prediction_text='The review is: {}'.format(prediction))
 
 #Set the model
 

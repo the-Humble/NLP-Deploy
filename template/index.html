@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
     <body>
         <div class="container-fluid">
@@ -23,23 +24,22 @@
                             <p class = "Note pb-4"><b>Note: Feed files with a "Review" and a "Sentiment" Column.</b></p>
                         </b>
                     </div>
-                    <div class="col-sm pb-5">
-                        <div class="row pb-5">
+                    <div class="row pb-5">
+                        <div class="col pb-2">
                             <h2>Feed the model</h2>
                             <!---Initialize form structure and inputs, set method to "POST"--->
-                            <form action = "{{url_for('feed')}}" method = "post" class = "info" enctype="multipart/form-data">
-                                <input type="file" id="myFile" name="filename"><span style="color:red"> * </span>
-                                <br>
+                            <form action = "{{url_for('feed')}}" method = "post" class = "info form-container" enctype="multipart/form-data">
+                                <input type="file" id="myFile" name="filename" class="filestyle">
                                 <select id="swselector" name="swselector">
                                     <option value="no">Don't consider stopwords</option>
                                     <option value="english">Consider English stopwords</option>
                                     <!--<option value="spanish">Consider Spanish stopwords</option>-->
                                 </select>
-                                <br>
                                 <button type="submit" class="btn btn-secondary" >Feed New Model</button>
                             </form>
+                            <div><p class = "result"><b>Feed Result: </b> <br> {{ feed_result }}</p></div>
                         </div>
-                        <div class="row">
+                        <div class="col">
                             <h2>Predict a result</h2>
                             <!---Initialize form structure and inputs, set method to "POST"--->
                             <form action = "{{url_for('predict')}}" method = "post" class = "info" >
@@ -48,24 +48,18 @@
                                 <br>
                                 <button type="submit" class="btn btn-primary">Predict</button>
                             </form>
+                            <div><p class = "result"><b>Prediction Result:</b> <br> {{ prediction_text }}</p></div>
                         </div>
                     </div>
-                    
-                    <!---Set placeholder for prediction output--->
-                    <div class ="pred">
-                        <h3>RESULTS</h3>
-                        <p class = "result"><b>{{ feed_result }}</b></p>
-                        <p class = "result"><b>{{ prediction_text }}</b></p>
-                    </div>
-                </div>
-                <!---Links/buttons to other websites--->
-                <div id = "menu-outer">
-                    <h5>Made using:</h5>
-                    <div class = "table">
-                        <ul id = "horizontal-list">
-                            <li><a href = "https://flask.palletsprojects.com/en/2.0.x/" target="_blank" class = "link"><span class = "titleLink">Python Flask</span></a></li>
-                            <li><a href = "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html" target="_blank" class = "link"><span class = "titleLink">Scikit-Learn</span></a></li>
-                        </ul>
+                    <!---Links/buttons to other websites--->
+                    <div id = "menu-outer">
+                        <h5 style="text-align: center;">Made using:</h5>
+                        <div class = "table">
+                            <ul id = "horizontal-list" style="list-style: none; text-align: center;">
+                                <li><a href = "https://flask.palletsprojects.com/en/2.0.x/" target="_blank" class = "link"><span class = "titleLink">Python Flask</span></a></li>
+                                <li><a href = "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html" target="_blank" class = "link"><span class = "titleLink">Scikit-Learn</span></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
